@@ -27,7 +27,7 @@
 </ul>
 </LI>    
 <LI> <b>activityLabels</b>. This variable storages information contained on activity_labels.txt from "UCI HAR Dataset". This two columns represent the relation between the numeric number used on the raw data and the activity. The name for each activity is storaged  as character vector on the second column. 6 obs of 2 variables</LI>
-<LI> <b>featinfo</b>. This variable storages information contained on activity_labels.txt from "UCI HAR Dataset". This files has a list of names for each variable recoded on the x_yyyy.txt files. 561 obs of 1 variables</LI>
+<LI> <b>featinfo</b>. This variable storages information contained on activity_labels.txt from "UCI HAR Dataset". This files has a list of names for each variable recoded on the x_yyyy.txt files. 561 obs of 1 variables.</LI>
 </OL>
 
 <H2> TEMPORAL FUNCTIONS </H2> 
