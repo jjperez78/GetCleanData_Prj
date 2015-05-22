@@ -59,13 +59,13 @@
 <li>3 to 563. Test experiment values</li>
 </ul></li>
 <li><b>cleanData</b>. This varaible contains all the cleaned information about the experiment. It is the result of several transformations over the rawData variable. Transformations:
-<ol>
+<ul>
 <li>Using my_quantile function values out of the range (mean-standard deviation, mean+standard deviation) are removed and replaced with NA.</li>
 <li>On the first column, numerical values for activity are replaced for the correspondent character strings.</li>
 <li>Added names as follows: first column is activity, second column is subject and the rest os column names are retrieved from features.txt </li>
-</ol>
+</ul>
 </li>
-<li><b>summarizeData</b>. This variables is calculated as a summary of cleanData. It represent the average value for each measured data (columns 3 to 563) for each each activity and subject. It requires several transformation over the data storaged on cleanData: 
+<li><b>summarizeData</b>. This variables is calculated as a summary of cleanData. It represent the average value for each measured data (columns 3 to 563) for each each activity and subject. It requires several transformation over the data storaged on cleanData:
 <ul>
 <li>Use of aggregate.data.frame to calculate the mean using activity and subject as key fields to create the groups.</li>
 <li>It is necessary to correct the names for the first two columns</li>
