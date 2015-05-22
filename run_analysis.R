@@ -15,6 +15,7 @@
 
 
 library(dplyr)
+library(car)
 
 
 
@@ -29,13 +30,13 @@ library(dplyr)
 
 ## TEST DATA FRAME
 ## Load the experiment data frame
-test<-read.table(file = "./test//X_test.txt")
+test<-read.table(file = "X_test.txt")
 
 ## Load the activity identificator
-testLabel<-read.csv("./test/y_test.txt",header = FALSE)
+testLabel<-read.csv("y_test.txt",header = FALSE)
 
 ## Load the information about the subject
-testSubject<-read.csv(file = "./test/subject_test.txt",header=FALSE,sep=" ")
+testSubject<-read.csv(file = "subject_test.txt",header=FALSE,sep=" ")
 
 ## Bind columns to join the data, the subject and  activity
 test_Data<-bind_cols(testLabel,testSubject,test)
@@ -45,13 +46,13 @@ test_Data<-bind_cols(testLabel,testSubject,test)
 
 ## TRAIN DATA FRAME
 ## Load the experiment data frame
-train<-read.table(file = "./train/X_train.txt")
+train<-read.table(file = "X_train.txt")
 
 ## Load the activity identificator
-trainLabel=read.csv("./train/y_train.txt",header = FALSE)
+trainLabel=read.csv("y_train.txt",header = FALSE)
 
 ## Load the information about the subject
-trainSubject<-read.csv(file = "./train/subject_train.txt",header=FALSE,sep=" ")
+trainSubject<-read.csv(file = "subject_train.txt",header=FALSE,sep=" ")
 
 ## Bind columns to join the data, the subject and  activity
 train_Data<-bind_cols(trainLabel,trainSubject,train)
@@ -114,23 +115,10 @@ rm(my_quantile)
 ## THIRD POINT - REPLACING THE ACTIVITY NUMBER FOR ITS LABEL ##
 ###############################################################
 
-## Load the file activity_labels.txt on a data frame called activityLabels
+## We use the recode command to replace the numerical values for the apropiate chain.
 
+cleanData[,1]<-recode(cleanData[,1],"1='WALKING';2='WALKING_UPSTAIRS';3='WALKING_DOWNSTAIRS';4='SITTING';5='STANDING';6='LAYING'")
 
-activityLabels<-read.csv("activity_labels.txt",header = FALSE,sep = " ")
-names(activityLabels)<-c("id","label")
-
-## ActivityLabels as two variables. The first variable is the numerical reference for each activity
-## and it is the same value we can see on the first column of cleanData. Using a loop we replace any row on cleanData with
-## the correspondent string 
-
-for (i in 1:length(activityLabels[,2]))
-{
-  cleanData[cleanData$activity==i,1]<-as.character(activityLabels[i,2])
-}
-
-## Remove some temporal variables to free memory
-rm(activityLabels,i)
 
 ## print("Step 3")
 

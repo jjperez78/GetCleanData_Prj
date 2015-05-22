@@ -99,19 +99,9 @@ Remove some temporal functions:
 <h2>THIRD POINT - REPLACING THE ACTIVITY NUMBER FOR ITS LABEL </h2>
 
 
-Load the file activity_labels.txt on a data frame called activityLabels:
-<center><b>activityLabels<-read.csv("activity_labels.txt",header = FALSE,sep = " ")</b></center>
-<center><b>names(activityLabels)<-c("id","label")</b></center>
-
-ActivityLabels as two variables. The first variable is the numerical reference for each activity and it is the same value we can see on the first column of cleanData. Using a loop we replace any row on cleanData with the correspondent string:
-
-<b>for (i in 1:length(activityLabels[,2]))
-{
-  cleanData[cleanData$activity==i,1]<-as.character(activityLabels[i,2])
-}</b>
-
-Remove some temporal variables to free memory:
-<center><b>rm(activityLabels,i)</b></center>
+We use the recode command to replace the numerical values for the apropiate chain:
+<center><b>cleanData[,1]<-recode(cleanData[,1],"1='WALKING';2='WALKING_UPSTAIRS';3='WALKING_DOWNSTAIRS';4='SITTING';5='STANDING';6='LAYING'")
+</b></center>
 
 
 
