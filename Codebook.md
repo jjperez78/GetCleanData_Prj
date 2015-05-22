@@ -1,88 +1,81 @@
 <center> <H1> CODE BOOK </B1>  </center>
 
-
 <H2> TEMPORAL VARIABLES </H2>
 
 <B> Variables created and deleted inside the script </B>
 
 <OL>
-<LI> test. This data frame storages information contained on X_test.txt from "UCI HAR Dataset/test". 2947 obs of 561 variables.     Without names. </LI>
-<LI> testLabel. This vector storages information contained on y_test.txt.txt from "UCI HAR Dataset/test"". 2947 obs of 1 variable. Without name </LI>
-<LI> testSubject. This vector storages information contained on subject_test.txt from "UCI HAR Dataset/test". 2947 obs of 1 variable. Without name </LI>
-<LI>test_Data. This data frame is the result of join using bind_cols of: test, testLabel and testSubject. 2947 obs of 563 variables. Without names. Columns:
+<LI> <b>test</b>. This data frame storages information contained on X_test.txt from "UCI HAR Dataset/test". 2947 obs of 561 variables.     Without names. </LI>
+<LI> <b>testLabel</b>. This vector storages information contained on y_test.txt.txt from "UCI HAR Dataset/test"". 2947 obs of 1 variable. Without name </LI>
+<LI> <b>testSubject</b>. This vector storages information contained on subject_test.txt from "UCI HAR Dataset/test". 2947 obs of 1 variable. Without name </LI>
+<LI><b>test_Data</b>. This data frame is the result of join using bind_cols of: test, testLabel and testSubject. 2947 obs of 563 variables. Without names. Columns:
 <UL>
-<LI>Activity</LI>
-<LI>Subject</LI>
-<LI> to 563. Test experiment values</Li>
+<LI>1. Activity</LI>
+<LI>2. Subject</LI>
+<LI>3 to 563. Test experiment values</Li>
 </UL>
+</LI>
+
+<LI> <b>train</b>. This data frame storages information contained on X_train.txt from "UCI HAR Dataset/test". 2947 obs of 561 variables. Withouth names</LI>    
+<LI> <b>trainLabel</b>. This vector storages information contained on y_train.txt.txt from "UCI HAR Dataset/test"". 2947 obs of 1 variable. Without name</LI>
+<LI> <b>trainSubject</b>. This vector storages information contained on subject_train.txt from "UCI HAR Dataset/test". 2947 obs of 1 variable. Without name</LI>   
+<LI> <b>train_Data</b>. This data frame is the result of join using bind_cols of: train, trainLabel and trainSubject. 2947 obs of 563 variables. Without names. Columns: 
+<UL>
+<LI>1. Activity</LI>
+<LI>2. Subject</LI>
+<LI>3 to 563. Test and train experiment values</LI>
+</LI>    
+<LI> <b>activityLabels</b>. This variable storages information contained on activity_labels.txt from "UCI HAR Dataset". This two columns represent the relation between the numeric number used on the raw data and the activity. The name for each activity is storaged  as character vector on the second column. 6 obs of 2 variables</LI>
+<LI> <b>featinfo. This variable storages information contained on activity_labels.txt from "UCI HAR Dataset". This files has a list of names for each variable recoded on the x_yyyy.txt files. 561 obs of 1 variables</LI>
 </OL>
 
-5. train. This data frame storages information contained on X_train.txt from "UCI HAR Dataset/test". 2947 obs of 561 variables. 
-    Withouth names
-    
-6. trainLabel. This vector storages information contained on y_train.txt.txt from "UCI HAR Dataset/test"". 2947 obs of 1 variable. 
-    Without name
-    
-7. trainSubject. This vector storages information contained on subject_train.txt from "UCI HAR Dataset/test". 2947 obs of 1 variable
-    . Without name
-    
-8. train_Data. This data frame is the result of join using bind_cols of: train, trainLabel and trainSubject. 2947 obs of 563
-    variables. Without names. Columns: 
-    1. Activity
-    2. Subject
-    3 to 563. Test and train experiment values.
-    
-9. activityLabels. This variable storages information contained on activity_labels.txt from "UCI HAR Dataset". This two columns
-    represent the relation between the numeric number used on the raw data and the activity. The name for each activity is storaged
-    as character vector on the second column. 6 obs of 2 variables
-10. featinfo. This variable storages information contained on activity_labels.txt from "UCI HAR Dataset". This files has a list of
-    names for each variable recoded on the x_yyyy.txt files. 561 obs of 1 variables
+<H2> TEMPORAL FUNCTIONS </H2> 
+
+<b> Functions created inside the script and deleted and the end of it </b>
+
+<ol>
+<li><b>my_quantile</b>. my_quantile calculateS a confiance band for a given vector, replazing any value out of this band with NA and returning the rest of the values. The output vector as the same length as the original but includes more NA values. Parameters:
+<ol>
+<li> data. Vector. Data to be reviewed. </li>
+<li> probs. Vector. Values of probabilities. All of them should be between 0 and 1. my_quantile will use this value as parameter when calling quantile to get the margins of the confiance band.</li>
+<li>from. Int. Position on the probs vector which define the lowest value for the confiance band. Range (1,length(probs)-1)</li>
+<li>to. Int. Position on the probs vector which define the lowest value for the confiance band. Range (2,length(probs))</li>
+</ol>
+</li>
+</ol>
 
 
-########################
-## TEMPORAL FUNCTIONS ##
-########################
-
-## Functions created inside the script and deleted and the end of it
-
-1. my_quantile. my_quantile calculateS a confiance band for a given vector, replazing any value out of this band
-    with NA and returning the rest of the values. The output vector as the same length as the original 
-    but includes more NA values. Parameters:
-      1. data. Vector. Data to be reviewed.
-      2. probs. Vector. Values of probabilities. All of them should be between 0 and 1. my_quantile will use this value as
-             parameter when calling quantile to get the margins of the confiance band. 
-      3. from. Int. Position on the probs vector which define the lowest value for the confiance band. Range (1,length(probs)-1)
-      4. to. Int. Position on the probs vector which define the lowest value for the confiance band. Range (2,length(probs))
+<H2> PERMANENT VARIABLES </H2> 
 
 
-#########################
-## PERMANENT VARIABLES ##
-#########################
+<b>Variables created and left available after the script finish</b>
 
-## Variables created and left available after the script finish
+<ol>
+<li><b>rawData</b></li>. This variable contains all the raw information about the experiment. It is the result of join, using bind_rows, test_Data and train_Data variables. 10299 obs. of 563 variables. Columns:
+<ul>
+<li>1. Activity</li>
+<li>2. Subject</li>
+<li>3 to 563. Test experiment values</li>
+</ul></li>
+<li><b>cleanData</b>. This varaible contains all the cleaned information about the experiment. It is the result of several transformations over the rawData variable. Transformations:
+<ol>
+<li>Using my_quantile function values out of the range (mean-standard deviation, mean+standard deviation) are removed and replaced with NA.</li>
+<li>On the first column, numerical values for activity are replaced for the correspondent character strings.</li>
+<li>Added names as follows: first column is activity, second column is subject and the rest os column names are retrieved from features.txt </li>
+</ol>
+</li>
+<li><b>summarizeData</b>. This variables is calculated as a summary of cleanData. It represent the average value for each measured data (columns 3 to 563) for each each activity and subject. It requires several transformation over the data storaged on cleanData: 
+<ul>
+<li>Use of aggregate.data.frame to calculate the mean using activity and subject as key fields to create the groups.</li>
+<li>It is necessary to correct the names for the first two columns</li>
+<li>As empty values, combinations subject-activity without data, get NaN values they are replaced by NA values.</li>
+</ul>
+</li>
+</ol>
 
-1. rawData. This variable contains all the raw information about the experiment. It is the result of join, using bind_rows,
-    test_Data and train_Data variables. 10299 obs. of 563 variables. Columns:
-    1. Activity
-    2. Subject
-    3 to 563. Test experiment values
-2. cleanData. This varaible contains all the cleaned information about the experiment. It is the result of several transformations
-    over the rawData variable. Transformations:
-    1. Using my_quantile function values out of the range (mean-standard deviation, mean+standard deviation) are removed 
-      and replaced with NA.
-    2. On the first column, numerical values for activity are replaced for the correspondent character strings.
-    3. Added names as follows: first column is activity, second column is subject and the rest os column names are retrieved
-      from features.txt
-          
-3. summarizeData. This variables is calculated as a summary of cleanData. It represent the average value for each measured data (columns 3 to 563) for each each activity and subject. It requires several transformation over the data storaged on cleanData:
-    1. Use of aggregate.data.frame to calculate the mean using activity and subject as key fields to create the groups.
-    2. It is necessary to correct the names for the first two columns
-    3. As empty values, combinations subject-activity without data, get NaN values they are replaced by NA values.
 
 
-#####################################################
-## APENDIX - NAMES FOR SUMMARIZEDATA AND CLEANDATA ##
-#####################################################
+<h2> APENDIX - NAMES FOR SUMMARIZEDATA AND CLEANDATA </h2>
 
   [1] "activity"                             "subject"                              "tBodyAcc-mean()-X"                   
   [4] "tBodyAcc-mean()-Y"                    "tBodyAcc-mean()-Z"                    "tBodyAcc-std()-X"                    
