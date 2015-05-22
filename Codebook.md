@@ -1,26 +1,22 @@
-<H1> CODE BOOK </B1>
+<center> <H1> CODE BOOK </B1>  </center>
 
 
 <H2> TEMPORAL VARIABLES </H2>
 
-<B> Variables created and deleted inside the script <B>
+<B> Variables created and deleted inside the script </B>
 
 <OL>
-<LI> 1. test. This data frame storages information contained on X_test.txt from "UCI HAR Dataset/test". 2947 obs of 561 variables.     Without names. </LI>
-</LI>
-    
-2. testLabel. This vector storages information contained on y_test.txt.txt from "UCI HAR Dataset/test"". 2947 obs of 1 variable.
-    Without name
-    
-3. testSubject. This vector storages information contained on subject_test.txt from "UCI HAR Dataset/test". 2947 obs of 1 variable. 
-    Without name
-    
-4. test_Data. This data frame is the result of join using bind_cols of: test, testLabel and testSubject. 2947 obs of 563 variables. 
-    Without names. Columns:
-    1. Activity
-    2. Subject
-    3 to 563. Test experiment values
-    
+<LI> test. This data frame storages information contained on X_test.txt from "UCI HAR Dataset/test". 2947 obs of 561 variables.     Without names. </LI>
+<LI> testLabel. This vector storages information contained on y_test.txt.txt from "UCI HAR Dataset/test"". 2947 obs of 1 variable. Without name </LI>
+<LI> testSubject. This vector storages information contained on subject_test.txt from "UCI HAR Dataset/test". 2947 obs of 1 variable. Without name </LI>
+<LI>test_Data. This data frame is the result of join using bind_cols of: test, testLabel and testSubject. 2947 obs of 563 variables. Without names. Columns:
+<UL>
+<LI>Activity</LI>
+<LI>Subject</LI>
+<LI> to 563. Test experiment values</Li>
+</UL>
+</OL>
+
 5. train. This data frame storages information contained on X_train.txt from "UCI HAR Dataset/test". 2947 obs of 561 variables. 
     Withouth names
     
