@@ -1,12 +1,13 @@
+<H1> CODE BOOK </B1>
 
-#############################
-## TEMPORAL VARIABLES ##
-#############################
 
-## Variables created and deleted inside the script
+<H2> TEMPORAL VARIABLES </H2>
 
-1. test. This data frame storages information contained on X_test.txt from "UCI HAR Dataset/test". 2947 obs of 561 variables.
-    Withouth names
+<B> Variables created and deleted inside the script <B>
+
+<OL>
+<LI> 1. test. This data frame storages information contained on X_test.txt from "UCI HAR Dataset/test". 2947 obs of 561 variables.     Without names. </LI>
+</LI>
     
 2. testLabel. This vector storages information contained on y_test.txt.txt from "UCI HAR Dataset/test"". 2947 obs of 1 variable.
     Without name
