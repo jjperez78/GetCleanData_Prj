@@ -11,6 +11,7 @@ Librarys used to be loaded
 
 
 <center><b>library(dplyr)</b></center>
+
 <center><b>library(car)</b></center>
 
 
@@ -142,7 +143,7 @@ Empty values, combinations subject-activity without data, get NaN values. In thi
 
 
 Exporting data using write.table function:
-<center>write.table(x = summarizeData,file = "summarizeData.txt",row.names = FALSE) </center>
+<center><b>write.table(x = summarizeData,file = "summarizeData.txt",row.names = FALSE)</b> </center>
 
 To load the table again:
 <center><b>read.table(file = "./../605b915000c111e5875bb7779b02d537.txt",header = FALSE,na.strings = "<NA>")</b></center>
