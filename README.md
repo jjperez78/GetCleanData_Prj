@@ -1,187 +1,155 @@
-
-#############################
-## BEFORE STARTING TO WORK ##
-#############################
-
-## This script has been developed to be used on the "UCI HAR Dataset" Folder. This is the main folder for the analized data
-## when you unzip the downloaded file. 
-
-## As this script uses relative references to access the train and test folders, please set "UCI HAR Dataset" as your
-## working directory.
+<center> <H1> CODE BOOK </B1>  </center>
 
 
+<h2> BEFORE STARTING TO WORK </h2>
 
-## Librarys used to be loaded
+
+<b>This script has been developed to be used on the "UCI HAR Dataset" Folder. This is the main folder for the analized data
+when you unzip the downloaded file. As this script uses relative references to access the train and test folders, please set "UCI HAR Dataset" as your working directory.</b>
+
+Librarys used to be loaded
 
 
-library(dplyr)
+<center><b>library(dplyr)</b></center>
 
 
 
-##########################################
-## FIRST POINT - MERGE BOTH DATA FRAMES ##
-##########################################
-
-## To merge both data frame first it is useful to have a separate data frame for each of them. After that a simple bind
-## operation will allow us to merge both data frames. 
-## To keep the information related with the activity and the subject the each data before we merge them.
-## Activity and Subject are going to be plazed on the first columns to simplify debbuging tasks.
-
-## TEST DATA FRAME
-## Load the experiment data frame
-test<-read.table(file = "./test//X_test.txt")
-
-## Load the activity identificator
-testLabel<-read.csv("./test/y_test.txt",header = FALSE)
-
-## Load the information about the subject
-testSubject<-read.csv(file = "./test/subject_test.txt",header=FALSE,sep=" ")
-
-## Bind columns to join the data, the subject and  activity
-test_Data<-bind_cols(testLabel,testSubject,test)
-
-## test_Data dimmesions are 2947x563
+<h2> FIRST POINT - MERGE BOTH DATA FRAMES</h2>
 
 
-## TRAIN DATA FRAME
-## Load the experiment data frame
-train<-read.table(file = "./train/X_train.txt")
+To merge both data frame first it is useful to have a separate data frame for each of them. After that a simple bind
+operation will allow us to merge both data frames.
 
-## Load the activity identificator
-trainLabel=read.csv("./train/y_train.txt",header = FALSE)
+To keep the information related with the activity and the subject the each data before we merge them.
+Activity and Subject are going to be plazed on the first columns to simplify debbuging tasks.
 
-## Load the information about the subject
-trainSubject<-read.csv(file = "./train/subject_train.txt",header=FALSE,sep=" ")
+<b>TEST DATA FRAME</b>
 
-## Bind columns to join the data, the subject and  activity
-train_Data<-bind_cols(trainLabel,trainSubject,train)
-## test_Data dimmesionas are 2947x563
+Load the experiment data frame:
+<center><b>test<-read.table(file = "./test//X_test.txt")</b></center>
 
-## RAW DATA FRAME
-## Merge all data using the bind_row function. We force bind_rows to include all the columns in both data frames
+Load the activity identificator:
+<center><b>testLabel<-read.csv("./test/y_test.txt",header = FALSE)</b></center>
 
-rawData<-bind_rows(test_Data[,1:ncol(test_Data)],train_Data[,1:ncol(train_Data)])
+Load the information about the subject:
+<center><b>testSubject<-read.csv(file = "./test/subject_test.txt",header=FALSE,sep=" ")</b></center>
 
-## Remove some temporal variables to free memory
-rm(test,testLabel,testSubject,test_Data)
-rm(train,trainLabel,trainSubject,train_Data)
+Bind columns to join the data, the subject and  activity
+<center><b>test_Data<-bind_cols(testLabel,testSubject,test)</b></center>
 
-## print("Step 1")
+<b>TRAIN DATA FRAME</b>
+
+Load the experiment data frame:
+<center><b>train<-read.table(file = "./train/X_train.txt")</b></center>
+
+Load the activity identificator:
+<center><b>trainLabel=read.csv("./train/y_train.txt",header = FALSE)</b></center>
+
+Load the information about the subject:
+<center><b>trainSubject<-read.csv(file = "./train/subject_train.txt",header=FALSE,sep=" ")</b></center>
+
+Bind columns to join the data, the subject and  activity
+<center><b>train_Data<-bind_cols(trainLabel,trainSubject,train)</b></center>
+
+<b>RAW DATA FRAME</b>
+
+Merge all data using the bind_row function. We force bind_rows to include all the columns in both data frames
+<center><b>rawData<-bind_rows(test_Data[,1:ncol(test_Data)],train_Data[,1:ncol(train_Data)])</b></center>
+
+Remove some temporal variables to free memory:
+<center><b>rm(test,testLabel,testSubject,test_Data)</b></center>
+<center><b>rm(train,trainLabel,trainSubject,train_Data)</b></center>
 
 
 
-#######################################################################
-## SECOND POINT - EXTRACT VALUES BETWEEN MEAN +/- STANDARD DEVIATION ##
-#######################################################################
+<h2> SECOND POINT - EXTRACT VALUES BETWEEN MEAN +/- STANDARD DEVIATION </h2>
 
-## Using th quantile function we are able to create a categorical variable to classify the points on a given vector.
-## The function my_quantile calculate the confiance band for a given vector, replazing any value out of this band
-## with NA and returning the rest of the values. The output vector as the same length as the original but includes
-## more NA values.
 
-## my_quantile
-## data. Vector. Data to be reviewed.
-## probs. Vector. Values of probabilities. All of them should be between 0 and 1. my_quantile will use this value as
-##        parameter when calling quantile to get the margins of the confiance band. 
-## from. Int. Position on the probs vector which define the lowest value for the confiance band. Range (1,length(probs)-1)
-## to. Int. Position on the probs vector which define the lowest value for the confiance band. Range (2,length(probs))
+Using th quantile function we are able to create a categorical variable to classify the points on a given vector.
 
+The function my_quantile calculate the confiance band for a given vector, replazing any value out of this band with NA and returning the rest of the values. The output vector as the same length as the original but includes more NA values.
+<b>my_quantile</b>
+<ol>
+<li>data. Vector. Data to be reviewed.</li>
+<li>probs. Vector. Values of probabilities. All of them should be between 0 and 1. my_quantile will use this value as parameter when calling quantile to get the margins of the confiance band. </li>
+<li>from. Int. Position on the probs vector which define the lowest value for the confiance band. Range (1,length(probs)-1)</li>
+<li>to. Int. Position on the probs vector which define the lowest value for the confiance band. Range (2,length(probs))</li>
+
+<b>
 my_quantile <- function (data,probs=c(0,1),from=1,to=2)
 {
   temp<-quantile(data,probs = probs,na.rm = TRUE)
   data[data < temp[from] | data > temp[to]]<-NA
   return(data)
-}
+}</b>
 
-## The possibilities to find a point between the mean and one standard deviation, to each side, is 68.2%.
-## According to that Our selected values for my_quantile should be: probs=c(0,0.159,0.659,1), from=2, to=3. 
-## Sapply is used to get the cleaned values and store them on cleanData
+The possibilities to find a point between the mean and one standard deviation, to each side, is 68.2%. According to that Our selected values for my_quantile should be: probs=c(0,0.159,0.659,1), from=2, to=3. 
 
-cleanData<-as.data.frame(sapply(X = rawData[,3:(ncol(rawData))],FUN = my_quantile,probs=c(0,0.159,0.659,1), from=2, to=3))
+Sapply is used to get the cleaned values and store them on cleanData
+<center><b>cleanData<-as.data.frame(sapply(X = rawData[,3:(ncol(rawData))],FUN = my_quantile,probs=c(0,0.159,0.659,1), from=2, to=3))</b></center>
 
-## Adding the activity and the subject columns
+Adding the activity and the subject columns:
+<center><b>cleanData<-bind_cols(rawData[,1:2],cleanData[,1:ncol(cleanData)])</b></center>
 
-cleanData<-bind_cols(rawData[,1:2],cleanData[,1:ncol(cleanData)])
-
-## Remove some temporal functions
-rm(my_quantile)
-
-## print("Step 2")
+Remove some temporal functions:
+<center><b>rm(my_quantile)</b></center>
 
 
 
-###############################################################
-## THIRD POINT - REPLACING THE ACTIVITY NUMBER FOR ITS LABEL ##
-###############################################################
-
-## Load the file activity_labels.txt on a data frame called activityLabels
+<h2>THIRD POINT - REPLACING THE ACTIVITY NUMBER FOR ITS LABEL </h2>
 
 
-activityLabels<-read.csv("activity_labels.txt",header = FALSE,sep = " ")
-names(activityLabels)<-c("id","label")
+Load the file activity_labels.txt on a data frame called activityLabels:
+<center><b>activityLabels<-read.csv("activity_labels.txt",header = FALSE,sep = " ")</b></center>
+<center><b>names(activityLabels)<-c("id","label")</b></center>
 
-## ActivityLabels as two variables. The first variable is the numerical reference for each activity
-## and it is the same value we can see on the first column of cleanData. Using a loop we replace any row on cleanData with
-## the correspondent string 
+ActivityLabels as two variables. The first variable is the numerical reference for each activity and it is the same value we can see on the first column of cleanData. Using a loop we replace any row on cleanData with the correspondent string:
 
-for (i in 1:length(activityLabels[,2]))
+<b>for (i in 1:length(activityLabels[,2]))
 {
   cleanData[cleanData$activity==i,1]<-as.character(activityLabels[i,2])
-}
+}</b>
 
-## Remove some temporal variables to free memory
-rm(activityLabels,i)
-
-## print("Step 3")
+Remove some temporal variables to free memory:
+<center><b>rm(activityLabels,i)</b></center>
 
 
-################################################
-## FOURTH POINT - ADDING SOME READABLE LABELS ##
-################################################
 
-## First column is activity, second column is subject and the rest os column names are retrieved from features.txt
-## After loading features.txt the names are assinged in the same order.
-
-## Load the file features.txt on a data set
-
-featinfo <- read.csv("features.txt",sep = " ",header = FALSE)
-names(cleanData)<-c("activity","subject",as.character(featinfo[,2]))
-
-## Remove some temporal variables to free memory
-rm(featinfo)
-
-## print("Step 4")
+<h2>FOURTH POINT - ADDING SOME READABLE LABELS </h2>
 
 
-#################################
-## FIFTH POINT - NEW DATA SET  ##
-#################################
+First column is activity, second column is subject and the rest os column names are retrieved from features.txt
 
-## The function aggregate.data.frame allow to calculate the mean using activity and subject as key fields to create the groups.
-## The result will be storaged on the variable summarizeData
+After loading features.txt the names are assinged in the same order.
 
-summarizeData<-aggregate.data.frame(x = cleanData[3:563], by=list(cleanData$activity,cleanData$subject), FUN = mean, na.rm=TRUE)
+Load the file features.txt on a data set:
+<center><b>featinfo <- read.csv("features.txt",sep = " ",header = FALSE)</b></center>
+<center><b>names(cleanData)<-c("activity","subject",as.character(featinfo[,2]))</b></center>
 
-## It is necessary to correct the names for the first two columns
-
-names(summarizeData)<-c("activity","subject",names(cleanData[,3:563]))
-
-## Empty values, combinations subject-activity without data, get NaN values. In this step NaN values are replaced by NA values
-## as it is easy to remove them when working in R
-
-summarizeData[summarizeData=="NaN"]<-NA
+Remove some temporal variables to free memory:
+<center><b>rm(featinfo)</b></center>
 
 
-## print("Step 5")
+
+<h2>FIFTH POINT - NEW DATA SET</h3>
 
 
-#######################################################
-## SIXTH POINT - EXPORTING DATA FRAME TO A TEXT FILE ##
-#######################################################
+The function aggregate.data.frame allow to calculate the mean using activity and subject as key fields to create the groups. The result will be storaged on the variable summarizeData:
+<center><b>summarizeData<-aggregate.data.frame(x = cleanData[3:563], by=list(cleanData$activity,cleanData$subject), FUN = mean, na.rm=TRUE)</b></center>
 
-## Exporting data using write.table function
+It is necessary to correct the names for the first two columns:
+<center><b>names(summarizeData)<-c("activity","subject",names(cleanData[,3:563]))</b></center>
 
-write.table(x = summarizeData,file = "summarizeData.txt",row.names = FALSE)
+Empty values, combinations subject-activity without data, get NaN values. In this step NaN values are replaced by NA values as it is easy to remove them when working in R:
+<center><b>summarizeData[summarizeData=="NaN"]<-NA</b></center>
 
-## To load the table again
-## read.table(file = "./../605b915000c111e5875bb7779b02d537.txt",header = FALSE,na.strings = "<NA>")
+
+
+<h2> SIXTH POINT - EXPORTING DATA FRAME TO A TEXT FILE </h2>
+
+
+Exporting data using write.table function:
+<center>write.table(x = summarizeData,file = "summarizeData.txt",row.names = FALSE) </center>
+
+To load the table again:
+<center><b>read.table(file = "./../605b915000c111e5875bb7779b02d537.txt",header = FALSE,na.strings = "<NA>")</b></center>
