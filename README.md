@@ -74,7 +74,7 @@ The function my_quantile calculate the confiance band for a given vector, replaz
 <li>probs. Vector. Values of probabilities. All of them should be between 0 and 1. my_quantile will use this value as parameter when calling quantile to get the margins of the confiance band. </li>
 <li>from. Int. Position on the probs vector which define the lowest value for the confiance band. Range (1,length(probs)-1)</li>
 <li>to. Int. Position on the probs vector which define the lowest value for the confiance band. Range (2,length(probs))</li>
-
+</ol>
 <b>
 my_quantile <- function (data,probs=c(0,1),from=1,to=2)
 {
@@ -135,12 +135,14 @@ Remove some temporal variables to free memory:
 
 
 The function aggregate.data.frame allow to calculate the mean using activity and subject as key fields to create the groups. The result will be storaged on the variable summarizeData:
+
 <center><b>summarizeData<-aggregate.data.frame(x = cleanData[3:563], by=list(cleanData$activity,cleanData$subject), FUN = mean, na.rm=TRUE)</b></center>
 
 It is necessary to correct the names for the first two columns:
 <center><b>names(summarizeData)<-c("activity","subject",names(cleanData[,3:563]))</b></center>
 
 Empty values, combinations subject-activity without data, get NaN values. In this step NaN values are replaced by NA values as it is easy to remove them when working in R:
+
 <center><b>summarizeData[summarizeData=="NaN"]<-NA</b></center>
 
 
