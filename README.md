@@ -10,9 +10,9 @@ when you unzip the downloaded file. As this script uses relative references to a
 Librarys used to be loaded
 
 
-<center><b>library(dplyr)</b></center>
+<center><b>library(dplyr)</b></center><br>
 
-<center><b>library(car)</b></center>
+<center><b>library(car)</b></center><br>
 
 
 
