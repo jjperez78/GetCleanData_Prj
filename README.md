@@ -11,6 +11,7 @@ Librarys used to be loaded
 
 
 <center><b>library(dplyr)</b></center>
+<center><b>library(car)</b></center>
 
 
 
